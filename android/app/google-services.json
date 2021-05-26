@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1085607668144",
+    "project_id": "cvparsing-6667f",
+    "storage_bucket": "cvparsing-6667f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085607668144:android:107c639ce856e722d64e75",
+        "android_client_info": {
+          "package_name": "com.example.cvloader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085607668144-b5k55qenci19pcducfim0o9fkud2ovcs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6b2t2JPZpiH7lGiYRG3GwQ5kfxc4sBjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085607668144-b5k55qenci19pcducfim0o9fkud2ovcs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
