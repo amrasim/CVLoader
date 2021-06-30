@@ -2,12 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cvloader/Screens/Login/login_screen.dart';
 import 'package:cvloader/Screens/Signup/components/background.dart';
-import 'package:cvloader/Screens/Signup/components/or_divider.dart';
-import 'package:cvloader/Screens/Signup/components/social_icon.dart';
 import 'package:cvloader/components/already_have_an_account_acheck.dart';
 import 'package:cvloader/components/rounded_button.dart';
-import 'package:cvloader/components/rounded_input_field.dart';
-import 'package:cvloader/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Body extends StatefulWidget {

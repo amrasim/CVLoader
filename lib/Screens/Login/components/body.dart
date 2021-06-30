@@ -1,5 +1,5 @@
+import 'package:cvloader/FactorsScreen/FactorsScreen.dart';
 import 'package:cvloader/ForgetPassword/ForgetPassScreen.dart';
-import 'package:cvloader/Home/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cvloader/Screens/Login/components/background.dart';
@@ -147,7 +147,7 @@ class BodyState extends State<Body> {
       isLoading = false;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => FactorsScreen()),
       );
     }).catchError((err) {
       print(err.message);

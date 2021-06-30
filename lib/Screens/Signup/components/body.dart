@@ -1,16 +1,12 @@
-import 'package:cvloader/Home/HomeScreen.dart';
-import 'package:cvloader/components/text_field_container.dart';
+
+import 'package:cvloader/FactorsScreen/FactorsScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cvloader/Screens/Login/login_screen.dart';
 import 'package:cvloader/Screens/Signup/components/background.dart';
-import 'package:cvloader/Screens/Signup/components/or_divider.dart';
-import 'package:cvloader/Screens/Signup/components/social_icon.dart';
 import 'package:cvloader/components/already_have_an_account_acheck.dart';
 import 'package:cvloader/components/rounded_button.dart';
-import 'package:cvloader/components/rounded_input_field.dart';
-import 'package:cvloader/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../constants.dart';
@@ -179,7 +175,7 @@ class SignUpBodyState extends State<Body> {
         isLoading = false;
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => FactorsScreen()),
         );
       });
     }).catchError((err) {

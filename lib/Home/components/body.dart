@@ -1,3 +1,4 @@
+import 'package:cvloader/FactorsScreen/FactorsScreen.dart';
 import 'package:cvloader/Screens/Login/login_screen.dart';
 import 'package:cvloader/Screens/Signup/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,8 +13,10 @@ import 'dart:async';
 import 'package:pdf_text/pdf_text.dart';
 
 class Body extends StatefulWidget {
+
+  final String major,university, age,experience;
   const Body({
-    Key key,
+    Key key,@required this.major,@required this.university,@required this.age,@required this.experience,
   }) : super(key: key);
   @override
   _MyAppState createState() => _MyAppState();
@@ -22,6 +25,8 @@ class Body extends StatefulWidget {
 class _MyAppState extends State<Body> {
   PDFDoc _pdfDoc;
   String _text = "";
+  String similarity="";
+  int counter=0;
 
   bool _buttonsEnabled = true;
 
@@ -121,7 +126,7 @@ class _MyAppState extends State<Body> {
     child: Text(
     _pdfDoc == null
     ? "Pick a new PDF document and wait for it to load..."
-        : "PDF document loaded, ${_pdfDoc.length} pages\n",
+        : "PDF document loaded, ${_pdfDoc.length} pages\n ,Factors Similarity ${similarity} %",
     style: TextStyle(fontSize: 18),
     textAlign: TextAlign.center,
     ),
@@ -146,7 +151,59 @@ class _MyAppState extends State<Body> {
     var filePickerResult = await FilePicker.getFile(type: FileType.custom, allowedExtensions: ['pdf']);;
     if (filePickerResult != null) {
       _pdfDoc = await PDFDoc.fromPath(filePickerResult.path);
-      setState(() {
+      setState(() async {
+        String text = await _pdfDoc.text;
+        print(widget.age);
+        print(text.contains(widget.age));
+//        similarity=
+         if ( text.contains(widget.age)){
+           counter++;
+           print("1");
+         }
+         else{
+
+         }
+          if(text.contains(widget.experience)){
+           counter++;
+           print("2");
+         }
+          else{
+
+          }
+          if(text.contains(widget.major)){
+           counter++;
+           print("3");
+         }
+          else{
+
+          }
+          if(text.contains(widget.university)){
+           counter++;
+           print("4");
+         }
+          else{
+
+          }
+          if(counter==4){
+            similarity="100";
+            counter=0;
+          }
+          else if(counter==3){
+            similarity="75";
+            counter=0;
+          }
+          else if(counter==2){
+            similarity="50";
+            counter=0;
+          }
+          else if(counter==1){
+            similarity="25";
+            counter=0;
+          }
+          else if(counter==0){
+            similarity="0";
+            counter=0;
+          }
 //        _pdfDoc.text
       });
     }
@@ -167,6 +224,7 @@ class _MyAppState extends State<Body> {
     setState(() {
       _text = text;
       _buttonsEnabled = true;
+
     });
   }
 
