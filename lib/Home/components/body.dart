@@ -2,9 +2,11 @@ import 'package:cvloader/FactorsScreen/FactorsScreen.dart';
 import 'package:cvloader/Screens/Login/login_screen.dart';
 import 'package:cvloader/Screens/Signup/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cvloader/Screens/Login/components/background.dart';
 
+import '../../ShowCVScreen.dart';
 import '../../constants.dart';
 import 'dart:math';
 import 'package:file_picker/file_picker.dart';
@@ -14,9 +16,9 @@ import 'package:pdf_text/pdf_text.dart';
 
 class Body extends StatefulWidget {
 
-  final String major,university, age,experience;
+  final String major,university, age,experience,field,fieldValue,field2,fieldValue2;
   const Body({
-    Key key,@required this.major,@required this.university,@required this.age,@required this.experience,
+    Key key,@required this.major,@required this.university,@required this.age,@required this.experience, this.field, this.fieldValue, this.field2, this.fieldValue2,
   }) : super(key: key);
   @override
   _MyAppState createState() => _MyAppState();
@@ -66,6 +68,27 @@ class _MyAppState extends State<Body> {
     padding: EdgeInsets.all(10),
     child: ListView(
     children: <Widget>[
+      Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        width: size.width * 0.8,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(29),
+          child: FlatButton(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+            color: kPrimaryColor,
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShowCVScreen(),
+              ));
+            },
+            child: Text(
+              "Show All updated CVs",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
     Container(
     margin: EdgeInsets.symmetric(vertical: 10),
     width: size.width * 0.8,
@@ -153,9 +176,75 @@ class _MyAppState extends State<Body> {
       _pdfDoc = await PDFDoc.fromPath(filePickerResult.path);
       setState(() async {
         String text = await _pdfDoc.text;
+        final databseRef=FirebaseDatabase.instance.reference().child("CVs");
+        databseRef.push().set({'cv':text}) ;
         print(widget.age);
         print(text.contains(widget.age));
 //        similarity=
+        if(widget.fieldValue.isNotEmpty||widget.fieldValue2.isNotEmpty){
+          if ( text.contains(widget.age)){
+            counter++;
+            print("1");
+          }
+          else{
+
+          }
+          if(text.contains(widget.experience)){
+            counter++;
+            print("2");
+          }
+          else{
+
+          }
+          if(text.contains(widget.major)){
+            counter++;
+            print("3");
+          }
+          else{
+
+          }
+          if(text.contains(widget.university)){
+            counter++;
+            print("4");
+          }
+          else{
+
+          }
+          if(text.contains(widget.fieldValue)||text.contains(widget.fieldValue2)){
+            counter++;
+            print("4");
+          }
+          else{
+
+          }
+          if(counter==5){
+            similarity="100";
+            counter=0;
+          }
+          else if(counter==4){
+            similarity="80";
+            counter=0;
+          }
+          else if(counter==3){
+            similarity="60";
+            counter=0;
+          }
+          else if(counter==2){
+            similarity="40";
+            counter=0;
+          }
+          else if(counter==1){
+            similarity="20";
+            counter=0;
+          }
+          else if(counter==0){
+            similarity="0";
+            counter=0;
+          }
+        }
+        else{
+
+
          if ( text.contains(widget.age)){
            counter++;
            print("1");
@@ -204,6 +293,7 @@ class _MyAppState extends State<Body> {
             similarity="0";
             counter=0;
           }
+        }
 //        _pdfDoc.text
       });
     }
